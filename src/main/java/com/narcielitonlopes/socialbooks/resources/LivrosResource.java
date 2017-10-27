@@ -4,15 +4,20 @@ import com.narcielitonlopes.socialbooks.domain.Comentario;
 import com.narcielitonlopes.socialbooks.domain.Livro;
 import com.narcielitonlopes.socialbooks.services.LivrosService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.CacheControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
+import java.sql.Time;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @RequestMapping("/livros")
@@ -41,7 +46,10 @@ public class LivrosResource {
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public ResponseEntity<?> buscar(@PathVariable("id") Long id){
         Livro livro = livrosService.buscar(id);
-        return ResponseEntity.status(HttpStatus.OK).body(livro);
+
+        CacheControl cacheControl = CacheControl.maxAge(20, TimeUnit.SECONDS);
+
+        return ResponseEntity.status(HttpStatus.OK).cacheControl(cacheControl).body(livro);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
@@ -60,6 +68,10 @@ public class LivrosResource {
     @RequestMapping(value = "/{id}/comentarios", method = RequestMethod.POST)
     public ResponseEntity<Void> adicionarComentario(@PathVariable("id") Long livroId,
                                                     @RequestBody Comentario comentario){
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+
+        comentario.setUsuario(authentication.getName());
 
         livrosService.salvarComentario(livroId, comentario);
 
