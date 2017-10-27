@@ -1,8 +1,12 @@
-package com.narcielitonlopes.socialbooks.com.narcielitonlopes.socialbooks.domain;
+package com.narcielitonlopes.socialbooks.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonInclude;
+import org.hibernate.validator.constraints.NotEmpty;
 
 import javax.persistence.*;
+import javax.validation.constraints.Size;
 import java.util.Date;
 
 @Entity
@@ -12,10 +16,14 @@ public class Comentario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotEmpty(message = "O comentario não pode ser vazio")
+    @Size(max = 1500, message = "O comentario não pode conter mais de 1500 caracteres.")
     private String texto;
 
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String usuario;
 
+    @JsonFormat(pattern = "dd/MM/yyyy")
     private Date data;
 
     @ManyToOne(fetch = FetchType.LAZY)

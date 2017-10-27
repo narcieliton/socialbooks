@@ -1,7 +1,7 @@
 package com.narcielitonlopes.socialbooks.services;
 
-import com.narcielitonlopes.socialbooks.com.narcielitonlopes.socialbooks.domain.Comentario;
-import com.narcielitonlopes.socialbooks.com.narcielitonlopes.socialbooks.domain.Livro;
+import com.narcielitonlopes.socialbooks.domain.Comentario;
+import com.narcielitonlopes.socialbooks.domain.Livro;
 import com.narcielitonlopes.socialbooks.repository.ComentariosRepository;
 import com.narcielitonlopes.socialbooks.repository.LivrosRepository;
 import com.narcielitonlopes.socialbooks.services.exceptions.LivroNaoEncontradoException;

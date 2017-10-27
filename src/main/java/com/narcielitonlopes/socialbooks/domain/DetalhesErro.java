@@ -1,4 +1,6 @@
-package com.narcielitonlopes.socialbooks.com.narcielitonlopes.socialbooks.domain;
+package com.narcielitonlopes.socialbooks.domain;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class DetalhesErro {
 
