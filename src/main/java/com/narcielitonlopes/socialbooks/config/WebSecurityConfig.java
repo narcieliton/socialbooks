@@ -1,4 +1,4 @@
-package config;
+package com.narcielitonlopes.socialbooks.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -11,7 +11,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("beanTecnologia").password("s3nh4").roles("USER");
+        auth.inMemoryAuthentication().withUser("lopes")
+                .password("s3nh4").roles("USER");
     }
 
     protected void configure(HttpSecurity http) throws Exception{
