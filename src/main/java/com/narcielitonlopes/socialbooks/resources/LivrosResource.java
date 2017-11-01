@@ -15,7 +15,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
 import java.net.URI;
-import java.sql.Time;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
@@ -38,7 +37,7 @@ public class LivrosResource {
         livro =  livrosService.salvar(livro);
 
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{i}").buildAndExpand(livro.getId()).toUri();
+                .path("/{id}").buildAndExpand(livro.getId()).toUri();
 
         return ResponseEntity.created(uri).build();
     }
@@ -70,7 +69,6 @@ public class LivrosResource {
                                                     @RequestBody Comentario comentario){
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
         comentario.setUsuario(authentication.getName());
 
         livrosService.salvarComentario(livroId, comentario);
