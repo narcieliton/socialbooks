@@ -20,9 +20,11 @@ public class AutoresResource {
     @Autowired
     private AutoresService autoresService;
 
+
     @RequestMapping(method = RequestMethod.GET, produces = {
             MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE
     })
+    @CrossOrigin
     public ResponseEntity<List<Autor>> listar(){
         return ResponseEntity.status(HttpStatus.OK).body(autoresService.listar());
     }
